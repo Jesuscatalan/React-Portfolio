@@ -18,10 +18,10 @@ export function ContactLogic({ children }) {
 
     const handleBlur = (e) => {
         const { name, value } = e.target;
-        let error = !value; 
+        let error = !value; // Default error: field is empty
     
         if (name === "email" && value) {
-          
+          // Email validation regex
             const isValidEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
             error = !isValidEmail;
         }
