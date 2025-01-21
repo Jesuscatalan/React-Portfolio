@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Outlet } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Box, Container } from "@chakra-ui/react";
 
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import Projects from "./components/pages/Projects";
+import Contact from "./components/pages/Contact";
+import Resume from "./components/pages/Resume";
+
+import Navbar from "./components/structures/Navbar";
+import Footer from "./components/structures/Footer";
+
+function Layout() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box 
+      bg="gray.100" 
+      minH="100vh" 
+      py={10} 
+      style={{
+        fontFamily: "Lato", 
+        backgroundImage: "url('https://cdn.pixabay.com/photo/2024/05/18/19/21/books-8770940_1280.jpg')",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+        minHeight: "100vh",
+      }}
+    >
+      <Container maxW="container.lg">
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </Container>
+    </Box>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="resume" element={<Resume />} />
+      </Route>
+    </Routes>
+  );
+}
+
+export default App;
